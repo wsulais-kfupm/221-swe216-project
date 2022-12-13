@@ -15,6 +15,10 @@ public class Package {
   @JoinColumn(name = "customerId")
   private Customer customer;
 
+  @ManyToOne
+  @JoinColumn(name = "centerId")
+  private Center center;
+
   @Column(nullable = false)
   private float weight;
 
@@ -125,6 +129,14 @@ public class Package {
 
   public void setCustomer(Customer customer) {
       this.customer = customer;
+  }
+
+  public Center getCenter() {
+    return center;
+  }
+
+  public void setCenter(Center center) {
+      this.center = center;
   }
 
 @Override
