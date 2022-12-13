@@ -11,6 +11,10 @@ public class Package {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
+  @ManyToOne
+  @JoinColumn(name = "customerId")
+  private Customer customer;
+
   @Column(nullable = false)
   private float weight;
 
@@ -115,7 +119,15 @@ public class Package {
       this.finalDeliveryDate = finalDeliveryDate;
   }
 
-  @Override
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+      this.customer = customer;
+  }
+
+@Override
   public String toString() {
     return "Package [id=" + id + "]";
   }
