@@ -19,6 +19,9 @@ public class Package {
   @JoinColumn(name = "centerId")
   private Center center;
 
+  @ManyToMany(mappedBy="packages")
+  private Set<Transportation> transportations;
+
   @Column(nullable = false)
   private float weight;
 
