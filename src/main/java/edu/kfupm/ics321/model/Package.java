@@ -1,12 +1,13 @@
 package edu.kfupm.ics321.model;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Set;
 import javax.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-public class Package {
+public class Package implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
@@ -19,8 +20,11 @@ public class Package {
   @JoinColumn(name = "centerId")
   private Center center;
 
-  @ManyToMany(mappedBy="packages")
+  @ManyToMany(mappedBy = "packages")
   private Set<Transportation> transportations;
+
+  @OneToMany(mappedBy = "pkg")
+  private Set<PackageStore> stores;
 
   @Column(nullable = false)
   private float weight;
@@ -60,6 +64,14 @@ public class Package {
     this.finalDeliveryDate = finalDeliveryDate;
   }
 
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
   public float getWeight() {
     return weight;
   }
@@ -77,28 +89,27 @@ public class Package {
   }
 
   public Dimensions getDims() {
-      return dimensions;
+    return dimensions;
   }
 
   public void setDims(Dimensions dimensions) {
-      this.dimensions = dimensions;
+    this.dimensions = dimensions;
   }
 
   public float getCost() {
-      return Math.max(weight, this.dimensions.getVolumetricWeight()) + fine;
+    return Math.max(weight, this.dimensions.getVolumetricWeight()) + fine;
   }
 
   public PackageType getType() {
-      return type;
+    return type;
   }
 
   public void setType(PackageType type) {
-      this.type = type;
+    this.type = type;
   }
 
-
   public PackageStatus getStatus() {
-      return status;
+    return status;
   }
 
   public void setStatus(PackageStatus status) {
@@ -109,21 +120,21 @@ public class Package {
   }
 
   public float getFine() {
-      return fine;
+    return fine;
   }
 
   public void setFine(float fine) {
-      if (this.status == PackageStatus.DELAYED) {
-          this.fine = Math.max(0.0f, fine);
-      }
+    if (this.status == PackageStatus.DELAYED) {
+      this.fine = Math.max(0.0f, fine);
+    }
   }
 
   public Date getFinalDeliveryDate() {
-      return finalDeliveryDate;
+    return finalDeliveryDate;
   }
 
   public void setFinalDeliveryDate(Date finalDeliveryDate) {
-      this.finalDeliveryDate = finalDeliveryDate;
+    this.finalDeliveryDate = finalDeliveryDate;
   }
 
   public Customer getCustomer() {
@@ -131,7 +142,7 @@ public class Package {
   }
 
   public void setCustomer(Customer customer) {
-      this.customer = customer;
+    this.customer = customer;
   }
 
   public Center getCenter() {
@@ -139,10 +150,26 @@ public class Package {
   }
 
   public void setCenter(Center center) {
-      this.center = center;
+    this.center = center;
   }
 
-@Override
+  public Set<Transportation> getTransportations() {
+    return transportations;
+  }
+
+  public void setTransportations(Set<Transportation> transportations) {
+    this.transportations = transportations;
+  }
+
+  public Set<PackageStore> getStores() {
+    return stores;
+  }
+
+  public void setStores(Set<PackageStore> stores) {
+    this.stores = stores;
+  }
+
+  @Override
   public String toString() {
     return "Package [id=" + id + "]";
   }
