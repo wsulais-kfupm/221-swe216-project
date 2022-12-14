@@ -15,7 +15,7 @@ public class Transportation {
     private String route;
 
     @ManyToMany()
-    @JoinTable(name = "transportations", joinColumns = {
+    @JoinTable(name = "transports", joinColumns = {
             @JoinColumn(name = "transportationId") }, inverseJoinColumns = {
                     @JoinColumn(name = "packageId") })
     private Set<Package> packages;
