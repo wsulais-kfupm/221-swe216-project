@@ -49,19 +49,23 @@ public class Package implements Serializable {
   @CreatedDate
   private Date finalDeliveryDate;
 
+  @Column(nullable = false)
+  private String destinationAddress = "";
+
   // @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL)
   // private PackageFine fine;
 
   public Package() {
-    this(0.0f, new Dimensions(), 0.0f, new Date());
+    this(0.0f, new Dimensions(), 0.0f, new Date(), "");
   }
 
-  public Package(float weight, Dimensions dimensions, float insuranceAmount, Date finalDeliveryDate) {
+  public Package(float weight, Dimensions dimensions, float insuranceAmount, Date finalDeliveryDate, String destinationAddress) {
     super();
     this.weight = weight;
     this.dimensions = dimensions;
     this.insuranceAmount = insuranceAmount;
     this.finalDeliveryDate = finalDeliveryDate;
+    this.destinationAddress = destinationAddress;
   }
 
   public long getId() {
@@ -127,6 +131,14 @@ public class Package implements Serializable {
     if (this.status == PackageStatus.DELAYED) {
       this.fine = Math.max(0.0f, fine);
     }
+  }
+
+  public String getDestinationAddress() {
+    return destinationAddress;
+  }
+
+  public void setDestinationAddress(String destinationAddress) {
+    this.destinationAddress = destinationAddress;
   }
 
   public Date getFinalDeliveryDate() {
