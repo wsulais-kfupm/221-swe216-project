@@ -22,7 +22,7 @@ public interface PackageRepository extends PagingAndSortingRepository<Package, L
 
     List<Package> findByFinalDeliveryDate(@Param("date") LocalDate finalDeliveryDate);
 
-    @Query(nativeQuery = true, value="select * from Package where FINAL_DELIVERY_DATE between :from and :to AND (TYPE = :#{#type?.ordinal()} OR :type IS NULL) AND (STATUS = :#{#status?.ordinal()} OR :status IS NULL)")
+    @Query(nativeQuery = true, value="select * from Package where FINAL_DELIVERY_DATE between ISNULL(:from, FINAL_DELIVERY_DATE) and ISNULL(:to, FINAL_DELIVERY_DATE) AND (TYPE = :#{#type?.ordinal()} OR :type IS NULL) AND (STATUS = :#{#status?.ordinal()} OR :status IS NULL)")
     List<Package> findBetween(@Param("from") @DateTimeFormat(iso = ISO.DATE) LocalDate from,
                               @Param("to") @DateTimeFormat(iso = ISO.DATE) LocalDate to,
                               @Param("type") Optional<PackageType> type,
