@@ -21,6 +21,10 @@ public class Center {
         super();
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getType() {
         return type;
     }

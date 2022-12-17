@@ -35,6 +35,10 @@ public class PackageStore {
         this.date = date;
     }
 
+    public PackageStoreId getId() {
+        return id;
+    }
+
     public Package getPkg() {
         return pkg;
     }

@@ -24,10 +24,6 @@ public class Location implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public Set<PackageStore> getStores() {
         return stores;
     }

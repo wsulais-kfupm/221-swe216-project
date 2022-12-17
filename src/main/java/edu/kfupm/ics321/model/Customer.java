@@ -22,6 +22,10 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Package> packages;
 
+    public long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -24,6 +24,10 @@ public class Transportation {
         super();
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getType() {
         return type;
     }
