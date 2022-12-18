@@ -12,11 +12,11 @@ public class Package implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "customerId")
   private Customer customer;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "centerId")
   private Center center;
 
