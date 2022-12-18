@@ -34,6 +34,10 @@ public class Customer {
         this.title = title;
     }
 
+    public String getName() {
+        return title + " " + firstName + " " + lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
